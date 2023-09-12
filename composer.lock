@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "aa322c53454393ed775cfe4807d54a50",
+    "content-hash": "af17dcaf2a6a4eb0b2792b8f6322f542",
     "packages": [
         {
             "name": "brick/math",
@@ -60,6 +60,57 @@
                 }
             ],
             "time": "2023-01-15T23:15:59+00:00"
+        },
+        {
+            "name": "chefhasteeth/pipeline",
+            "version": "v1.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/chefhasteeth/pipeline.git",
+                "reference": "52f2762d565bee166d34d050da60838a87ba157c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/chefhasteeth/pipeline/zipball/52f2762d565bee166d34d050da60838a87ba157c",
+                "reference": "52f2762d565bee166d34d050da60838a87ba157c",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "^9.0|^10.0",
+                "php": "^8.1.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^3.8",
+                "nunomaduro/collision": "^6.2",
+                "orchestra/testbench": "^7.5",
+                "phpunit/phpunit": "^9.5",
+                "squizlabs/php_codesniffer": "^3.6"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Chefhasteeth\\Pipeline\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Sam Bedwell",
+                    "email": "hello@chefhasteeth.com"
+                }
+            ],
+            "keywords": [
+                "laravel",
+                "pipe",
+                "pipeline"
+            ],
+            "support": {
+                "source": "https://github.com/chefhasteeth/pipeline/tree/v1.0.3"
+            },
+            "time": "2023-02-15T18:57:42+00:00"
         },
         {
             "name": "dflydev/dot-access-data",
@@ -1603,16 +1654,16 @@
         },
         {
             "name": "league/flysystem",
-            "version": "3.15.1",
+            "version": "3.16.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem.git",
-                "reference": "a141d430414fcb8bf797a18716b09f759a385bed"
+                "reference": "4fdf372ca6b63c6e281b1c01a624349ccb757729"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/a141d430414fcb8bf797a18716b09f759a385bed",
-                "reference": "a141d430414fcb8bf797a18716b09f759a385bed",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/4fdf372ca6b63c6e281b1c01a624349ccb757729",
+                "reference": "4fdf372ca6b63c6e281b1c01a624349ccb757729",
                 "shasum": ""
             },
             "require": {
@@ -1621,6 +1672,8 @@
                 "php": "^8.0.2"
             },
             "conflict": {
+                "async-aws/core": "<1.19.0",
+                "async-aws/s3": "<1.14.0",
                 "aws/aws-sdk-php": "3.209.31 || 3.210.0",
                 "guzzlehttp/guzzle": "<7.0",
                 "guzzlehttp/ringphp": "<1.1.1",
@@ -1640,7 +1693,7 @@
                 "microsoft/azure-storage-blob": "^1.1",
                 "phpseclib/phpseclib": "^3.0.14",
                 "phpstan/phpstan": "^0.12.26",
-                "phpunit/phpunit": "^9.5.11",
+                "phpunit/phpunit": "^9.5.11|^10.0",
                 "sabre/dav": "^4.3.1"
             },
             "type": "library",
@@ -1675,7 +1728,7 @@
             ],
             "support": {
                 "issues": "https://github.com/thephpleague/flysystem/issues",
-                "source": "https://github.com/thephpleague/flysystem/tree/3.15.1"
+                "source": "https://github.com/thephpleague/flysystem/tree/3.16.0"
             },
             "funding": [
                 {
@@ -1687,20 +1740,20 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-05-04T09:04:26+00:00"
+            "time": "2023-09-07T19:22:17+00:00"
         },
         {
             "name": "league/flysystem-local",
-            "version": "3.15.0",
+            "version": "3.16.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem-local.git",
-                "reference": "543f64c397fefdf9cfeac443ffb6beff602796b3"
+                "reference": "ec7383f25642e6fd4bb0c9554fc2311245391781"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem-local/zipball/543f64c397fefdf9cfeac443ffb6beff602796b3",
-                "reference": "543f64c397fefdf9cfeac443ffb6beff602796b3",
+                "url": "https://api.github.com/repos/thephpleague/flysystem-local/zipball/ec7383f25642e6fd4bb0c9554fc2311245391781",
+                "reference": "ec7383f25642e6fd4bb0c9554fc2311245391781",
                 "shasum": ""
             },
             "require": {
@@ -1735,7 +1788,7 @@
             ],
             "support": {
                 "issues": "https://github.com/thephpleague/flysystem-local/issues",
-                "source": "https://github.com/thephpleague/flysystem-local/tree/3.15.0"
+                "source": "https://github.com/thephpleague/flysystem-local/tree/3.16.0"
             },
             "funding": [
                 {
@@ -1747,7 +1800,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-05-02T20:02:14+00:00"
+            "time": "2023-08-30T10:23:59+00:00"
         },
         {
             "name": "league/mime-type-detection",
@@ -1907,17 +1960,203 @@
             "time": "2023-06-21T08:46:11+00:00"
         },
         {
+            "name": "ndinhbang/eloquent-filters",
+            "version": "dev-develop",
+            "dist": {
+                "type": "path",
+                "url": "../packages/ndinhbang/eloquent-filters",
+                "reference": "d6abaa58a92d77d9f3a32d2778fe0a544fc2dca6"
+            },
+            "require": {
+                "chefhasteeth/pipeline": "^1.0",
+                "laravel/framework": "^10.0",
+                "php": "^8.1"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Ndinhbang\\EloquentFilters\\EloquentFiltersServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Ndinhbang\\EloquentFilters\\": "src"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nguyen Dinh Bang",
+                    "email": "ndinhbang111@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A laravel package to provides an elegant way to filter your eloquent model via the request query string",
+            "homepage": "https://github.com/ndinhbang/eloquent-filters",
+            "keywords": [
+                "eloquent",
+                "eloquent-filters",
+                "laravel"
+            ],
+            "transport-options": {
+                "relative": true
+            }
+        },
+        {
+            "name": "ndinhbang/query-cache",
+            "version": "dev-develop",
+            "dist": {
+                "type": "path",
+                "url": "../packages/ndinhbang/query-cache",
+                "reference": "43abdcc4e667ff0757af8ebfae55aec3541cbe4c"
+            },
+            "require": {
+                "laravel/framework": "^10.0",
+                "php": "^8.1"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Ndinhbang\\QueryCache\\QueryCacheServiceProvider"
+                    ],
+                    "aliases": {
+                        "QueryCache": "Ndinhbang\\QueryCache\\Facades\\QueryCache"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Ndinhbang\\QueryCache\\": "src"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nguyen Dinh Bang",
+                    "email": "ndinhbang111@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A laravel package to cache database query result",
+            "homepage": "https://github.com/ndinhbang/query-cache",
+            "keywords": [
+                "cache",
+                "eloquent-cache",
+                "laravel",
+                "query-cache"
+            ],
+            "transport-options": {
+                "relative": true
+            }
+        },
+        {
+            "name": "ndinhbang/response-cache",
+            "version": "dev-develop",
+            "dist": {
+                "type": "path",
+                "url": "../packages/ndinhbang/response-cache",
+                "reference": "3fe58e9f8fff73432ce4a9ecf323769ce68cd260"
+            },
+            "require": {
+                "laravel/framework": "^10.0",
+                "php": "^8.1"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Ndinhbang\\ResponseCache\\ResponseCacheServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Ndinhbang\\ResponseCache\\": "src"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Dinh Bang Nguyen",
+                    "email": "ndinhbang111@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": " A laravel package to cache entire response",
+            "homepage": "https://github.com/ndinhbang/response-cache",
+            "keywords": [
+                "cache",
+                "laravel",
+                "response-cache"
+            ],
+            "transport-options": {
+                "relative": true
+            }
+        },
+        {
+            "name": "ndinhbang/support",
+            "version": "dev-develop",
+            "dist": {
+                "type": "path",
+                "url": "../packages/ndinhbang/support",
+                "reference": "afce29fca0dd8bcc6fc576d95885f3097928e504"
+            },
+            "require": {
+                "laravel/framework": "^10.0",
+                "php": "^8.1"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": []
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Ndinhbang\\Support\\": "src"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Dinh Bang Nguyen",
+                    "email": "ndinhbang111@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A laravel package to provides additional helpers",
+            "homepage": "https://github.com/ndinhbang/support",
+            "keywords": [
+                "ndinhbang",
+                "support"
+            ],
+            "transport-options": {
+                "relative": true
+            }
+        },
+        {
             "name": "nesbot/carbon",
-            "version": "2.69.0",
+            "version": "2.70.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/briannesbitt/Carbon.git",
-                "reference": "4308217830e4ca445583a37d1bf4aff4153fa81c"
+                "reference": "d3298b38ea8612e5f77d38d1a99438e42f70341d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/4308217830e4ca445583a37d1bf4aff4153fa81c",
-                "reference": "4308217830e4ca445583a37d1bf4aff4153fa81c",
+                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/d3298b38ea8612e5f77d38d1a99438e42f70341d",
+                "reference": "d3298b38ea8612e5f77d38d1a99438e42f70341d",
                 "shasum": ""
             },
             "require": {
@@ -2010,7 +2249,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-08-03T09:00:52+00:00"
+            "time": "2023-09-07T16:43:50+00:00"
         },
         {
             "name": "nette/schema",
@@ -5805,16 +6044,16 @@
         },
         {
             "name": "laravel/pint",
-            "version": "v1.13.0",
+            "version": "v1.13.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/pint.git",
-                "reference": "a19bd99c91b158f33a4c5ffe9653d17a921424de"
+                "reference": "22f204242d68095b3ba7dab5d3ef0240454a4652"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/pint/zipball/a19bd99c91b158f33a4c5ffe9653d17a921424de",
-                "reference": "a19bd99c91b158f33a4c5ffe9653d17a921424de",
+                "url": "https://api.github.com/repos/laravel/pint/zipball/22f204242d68095b3ba7dab5d3ef0240454a4652",
+                "reference": "22f204242d68095b3ba7dab5d3ef0240454a4652",
                 "shasum": ""
             },
             "require": {
@@ -5867,7 +6106,7 @@
                 "issues": "https://github.com/laravel/pint/issues",
                 "source": "https://github.com/laravel/pint"
             },
-            "time": "2023-09-05T15:45:33+00:00"
+            "time": "2023-09-06T11:03:34+00:00"
         },
         {
             "name": "laravel/sail",
@@ -7139,16 +7378,16 @@
         },
         {
             "name": "sebastian/exporter",
-            "version": "5.0.0",
+            "version": "5.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/exporter.git",
-                "reference": "f3ec4bf931c0b31e5b413f5b4fc970a7d03338c0"
+                "reference": "32ff03d078fed1279c4ec9a407d08c5e9febb480"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/exporter/zipball/f3ec4bf931c0b31e5b413f5b4fc970a7d03338c0",
-                "reference": "f3ec4bf931c0b31e5b413f5b4fc970a7d03338c0",
+                "url": "https://api.github.com/repos/sebastianbergmann/exporter/zipball/32ff03d078fed1279c4ec9a407d08c5e9febb480",
+                "reference": "32ff03d078fed1279c4ec9a407d08c5e9febb480",
                 "shasum": ""
             },
             "require": {
@@ -7204,7 +7443,8 @@
             ],
             "support": {
                 "issues": "https://github.com/sebastianbergmann/exporter/issues",
-                "source": "https://github.com/sebastianbergmann/exporter/tree/5.0.0"
+                "security": "https://github.com/sebastianbergmann/exporter/security/policy",
+                "source": "https://github.com/sebastianbergmann/exporter/tree/5.0.1"
             },
             "funding": [
                 {
@@ -7212,7 +7452,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-02-03T07:06:49+00:00"
+            "time": "2023-09-08T04:46:58+00:00"
         },
         {
             "name": "sebastian/global-state",
@@ -8050,7 +8290,12 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "ndinhbang/query-cache": 20,
+        "ndinhbang/response-cache": 20,
+        "ndinhbang/eloquent-filters": 20,
+        "ndinhbang/support": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
