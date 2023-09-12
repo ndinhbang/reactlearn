@@ -2,10 +2,10 @@
 
 namespace App\Http\Middleware;
 
-use Closure;
 use GrahamCampbell\SecurityCore\Security;
+use Illuminate\Foundation\Http\Middleware\TrimStrings as Middleware;
 
-class Santinizer
+class Santinizer extends Middleware
 {
     protected Security $santinizer;
 
@@ -15,34 +15,23 @@ class Santinizer
     }
 
     /**
-     * Set the proper Bouncer scope for the incoming request.
+     * The names of the attributes that should not be santinized.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param \Closure $next
-     * @return mixed
+     * @var array<int, string>
      */
-    public function handle(\Illuminate\Http\Request $request, Closure $next): mixed
-    {
-        $request->merge($this->cleanArray($request->input()));
+    protected $except = [
+        'current_password',
+        'password',
+        'password_confirmation',
+    ];
 
-        return $next($request);
-    }
-
-    /**
-     * Clean a specified value or values.
-     *
-     * @param array $values
-     *
-     * @return string|int|bool|array|float|null
-     */
-    public function cleanArray(array $values): string|int|bool|array|null|float
+    public function transform($key, $value)
     {
-        return array_map(function ($value) {
-            return match (true) {
-                is_array($value) => $this->cleanArray($value),
-                is_bool($value), is_int($value), is_float($value), is_null($value) => $value,
-                default => trim($this->santinizer->clean((string)$value)),
-            };
-        }, $values);
+        $value = parent::transform($key, $value);
+
+        return match (true) {
+            is_bool($value), is_int($value), is_float($value), is_null($value) => $value,
+            default => $this->santinizer->clean($value),
+        };
     }
 }
