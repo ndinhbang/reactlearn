@@ -15,6 +15,7 @@ class ArticleResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
+            'id' => $this->id,
             'name' => $this->name,
             'category' => new CategoryResource( $this->whenLoaded('category') ),
             'comments' => CommentResource::collection($this->whenLoaded('comments')),
