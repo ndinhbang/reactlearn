@@ -1,7 +1,12 @@
 import { getArticles, getDetailArticles } from "@/services/article.service";
+import { defer } from "react-router-dom";
 
 export async function articlePaginationLoader({ params }) {
-    return await getArticles({ params });
+    const promise = getArticles({ params });
+
+    return defer({
+        articles: promise
+    })
 }
 
 export async function articleDetailLoader({ params }) {

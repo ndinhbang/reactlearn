@@ -4,7 +4,7 @@ const Dashboard = () => {
     const navigation = useNavigation();
 
     return (
-        <div>Dashboard {navigation.state === "loading" ? "loading" : ""}</div>
+        <div>Dashboard {navigation.state === "navigating" ? "navigating" : ""}</div>
     )
 }
 

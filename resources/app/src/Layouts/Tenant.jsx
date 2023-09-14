@@ -1,11 +1,11 @@
 import { Outlet } from "react-router-dom";
 
-const MasterLayout = () => {
+const TenantLayout = () => {
     return (
-        <div className={`master-layout`}>
+        <div className={`tenant-layout`}>
             <Outlet />
         </div>
     )
 }
 
-export default MasterLayout
+export default TenantLayout
