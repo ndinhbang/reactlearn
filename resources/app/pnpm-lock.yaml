@@ -35,6 +35,9 @@ dependencies:
   dayjs:
     specifier: ^1.11.9
     version: 1.11.9
+  idb:
+    specifier: ^7.1.1
+    version: 7.1.1
   jotai:
     specifier: ^2.4.2
     version: 2.4.2(@types/react@18.2.21)(react@18.2.0)
@@ -3279,7 +3282,6 @@ packages:
 
   /idb@7.1.1:
     resolution: {integrity: sha512-gchesWBzyvGHRO9W8tzUWFDycow5gwjvFKfyV9FF32Y7F50yZMp7mP+T2mJIWFx49zicqyC4uefHM17o6xKIVQ==}
-    dev: true
 
   /ignore@5.2.4:
     resolution: {integrity: sha512-MAb38BcSbH0eHNBxn7ql2NH/kX33OkB3lZ1BNdh7ENeRChHTYsTvWrMubiIAMNS2llXEEgZ1MUOBtXChP3kaFQ==}
