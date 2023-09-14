@@ -12,6 +12,8 @@
   "dependencies": {
     "@ant-design/icons": "^5.2.6",
     "@coreui/coreui-pro": "^4.6.3",
+    "@coreui/icons": "^3.0.1",
+    "@coreui/icons-react": "^2.2.1",
     "@coreui/react-pro": "^4.13.1",
     "@formily/antd-v5": "^1.1.1",
     "@formily/core": "^2.2.29",
