@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Overridden\Passport\Bridge;
+namespace App\Src\Passport\Bridge;
 
 use DateTimeImmutable;
 use Lcobucci\JWT\Token;
