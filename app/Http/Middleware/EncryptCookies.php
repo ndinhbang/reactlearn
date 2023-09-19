@@ -12,6 +12,21 @@ class EncryptCookies extends Middleware
      * @var array<int, string>
      */
     protected $except = [
-        //
+
     ];
+
+    /**
+     * Determine whether encryption has been disabled for the given cookie.
+     *
+     * @param  string  $name
+     * @return bool
+     */
+    public function isDisabled($name)
+    {
+        $merged = array_merge($this->except, [
+            config('passport.cookie.refresh_token'),
+            config('passport.cookie.fingerprint'),
+        ]);
+        return in_array($name, $merged);
+    }
 }

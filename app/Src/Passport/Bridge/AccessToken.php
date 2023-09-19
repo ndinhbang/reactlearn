@@ -2,7 +2,9 @@
 
 namespace App\Src\Passport\Bridge;
 
+use App\Src\Passport\TokenFingerprintTrait;
 use DateTimeImmutable;
+use Illuminate\Support\Str;
 use Lcobucci\JWT\Token;
 use League\OAuth2\Server\Entities\AccessTokenEntityInterface;
 use League\OAuth2\Server\Entities\ClientEntityInterface;
@@ -12,7 +14,7 @@ use League\OAuth2\Server\Entities\Traits\TokenEntityTrait;
 
 class AccessToken implements AccessTokenEntityInterface
 {
-    use AccessTokenTrait, EntityTrait, TokenEntityTrait;
+    use AccessTokenTrait, EntityTrait, TokenEntityTrait, TokenFingerprintTrait;
 
     /**
      * Create a new token instance.
@@ -31,6 +33,7 @@ class AccessToken implements AccessTokenEntityInterface
         }
 
         $this->setClient($client);
+        $this->setFingerprint(Str::random(40));
     }
 
     /**
@@ -49,6 +52,7 @@ class AccessToken implements AccessTokenEntityInterface
             ->canOnlyBeUsedAfter(new DateTimeImmutable())
             ->expiresAt($this->getExpiryDateTime())
             ->relatedTo((string) $this->getUserIdentifier())
+            ->withClaim('fingerprint', hash('sha256', $this->getFingerprint()))
             ->withClaim('scopes', $this->getScopes())
             ->getToken($this->jwtConfiguration->signer(), $this->jwtConfiguration->signingKey());
     }

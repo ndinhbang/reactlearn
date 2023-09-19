@@ -64,4 +64,9 @@ return [
         'secret' => env('PASSPORT_PASSWORD_GRANT_CLIENT_SECRET'),
     ],
 
+    'cookie' => [
+        'fingerprint' => env('PASSPORT_FINGERPRINT_COOKIE', '__Secure-fingerprint'),
+        'refresh_token' => env('PASSPORT_REFRESH_TOKEN_COOKIE', '__Secure-refresh_token'),
+    ],
+
 ];
