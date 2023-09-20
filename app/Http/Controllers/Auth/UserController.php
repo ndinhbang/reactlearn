@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\User;
+namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class ShowController extends Controller
+class UserController extends Controller
 {
     /**
      * Handle the incoming request.

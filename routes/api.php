@@ -16,16 +16,17 @@ use Illuminate\Support\Facades\Route;
 Route::prefix("v1")->name('v1.')->group(function () {
     Route::prefix("auth")->name('auth.')->group(function () {
         Route::post('login', \App\Http\Controllers\Auth\LoginController::class)->name('login')->middleware(['throttle:5,5']);
+        Route::post('refresh', \App\Http\Controllers\Auth\RefreshController::class)->name('refresh')->middleware(['throttle:5,15']);
+
+        Route::middleware(['auth:api'])->group(function () {
+            Route::delete('logout', \App\Http\Controllers\Auth\LogoutController::class)->name('logout');
+            Route::get('user', \App\Http\Controllers\Auth\UserController::class)->name('user');
+        });
     });
 
     // Authenticated Routes
     Route::middleware(['auth:api'])->group(function () {
-        Route::delete('logout', \App\Http\Controllers\Auth\LogoutController::class)->name('logout');
-        Route::get('iam', \App\Http\Controllers\User\ShowController::class)->name('iam');
-
-        Route::prefix("user")->name('user.')->group(function () {
-            Route::get('/', \App\Http\Controllers\User\ShowController::class)->name('show');
-        });
+        //
     });
 });
 
