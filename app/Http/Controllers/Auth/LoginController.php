@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Src\Passport\AuthorizationServer;
+use Illuminate\Support\Facades\Cache;
 use Laravel\Passport\Exceptions\OAuthServerException;
 use Laravel\Passport\Http\Controllers\ConvertsPsrResponses;
 use Laravel\Passport\TokenRepository;
@@ -52,9 +53,17 @@ class LoginController extends Controller
     /**
      * Handle the incoming request.
      * @throws \Laravel\Passport\Exceptions\OAuthServerException
+     * @throws \App\Exceptions\RequestLockedException
      */
     public function __invoke(LoginRequest $request)
     {
+        // Automic lock
+        $lock = Cache::lock("lock:login:{$request->username}");
+        // If you cant accquire the lock
+        if (is_null($lock->get())) {
+            throw new \App\Exceptions\RequestLockedException();
+        }
+
         try {
             /**@var \App\Src\Passport\ResponseTypes\BearerTokenResponse $tokenResponse*/
             $tokenResponse = $this->server->getAccessTokenResponse(
@@ -70,6 +79,8 @@ class LoginController extends Controller
             return $tokenResponse->toResponse();
         } catch (LeagueException $e) {
             throw new OAuthServerException($e, $this->convertResponse($e->generateHttpResponse(new Psr7Response)));
+        } finally {
+            $lock->release();
         }
     }
 
