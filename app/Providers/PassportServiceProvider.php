@@ -52,12 +52,6 @@ class PassportServiceProvider extends \Laravel\Passport\PassportServiceProvider
                 $server->enableGrantType(
                     new ClientCredentialsGrant, Passport::tokensExpireIn()
                 );
-
-                if (Passport::$implicitGrantEnabled) {
-                    $server->enableGrantType(
-                        $this->makeImplicitGrant(), Passport::tokensExpireIn()
-                    );
-                }
             });
         });
     }

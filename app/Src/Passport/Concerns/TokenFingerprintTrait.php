@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Src\Passport;
+namespace App\Src\Passport\Concerns;
 
 trait TokenFingerprintTrait
 {
