@@ -65,7 +65,8 @@ return [
     ],
 
     'cookie' => [
-        'fingerprint' => env('PASSPORT_FINGERPRINT_COOKIE', '__Secure-fingerprint'),
+        'access_token' => env('PASSPORT_ACCESS_TOKEN_COOKIE', '__Secure-access_token'),
+        'fingerprint' => env('PASSPORT_FINGERPRINT_COOKIE', '__Secure-fp'),
         'refresh_token' => env('PASSPORT_REFRESH_TOKEN_COOKIE', '__Secure-refresh_token'),
     ],
 

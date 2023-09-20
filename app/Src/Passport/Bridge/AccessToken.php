@@ -52,7 +52,7 @@ class AccessToken implements AccessTokenEntityInterface
             ->canOnlyBeUsedAfter(new DateTimeImmutable())
             ->expiresAt($this->getExpiryDateTime())
             ->relatedTo((string) $this->getUserIdentifier())
-            ->withClaim('fingerprint', hash('sha256', $this->getFingerprint()))
+            ->withClaim('fp', hash('sha256', $this->getFingerprint()))
             ->withClaim('scopes', $this->getScopes())
             ->getToken($this->jwtConfiguration->signer(), $this->jwtConfiguration->signingKey());
     }

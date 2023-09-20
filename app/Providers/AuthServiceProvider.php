@@ -28,10 +28,10 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Passport::cookie('__Secure-l10_TkyzLHZ8Zdku');
+        Passport::cookie(config('passport.cookie.access_token'));
         Passport::hashClientSecrets();
         Passport::tokensExpireIn(now()->addMinutes(15));
-        Passport::refreshTokensExpireIn(now()->addDays(30));
+        Passport::refreshTokensExpireIn(now()->addDays(7));
         Passport::personalAccessTokensExpireIn(now()->addMonths(6));
 
         Passport::useTokenModel(Token::class);
