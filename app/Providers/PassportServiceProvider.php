@@ -3,9 +3,11 @@
 namespace App\Providers;
 
 use App\Src\Passport\AuthorizationServer;
+use App\Src\Passport\Bridge\BearerTokenValidator;
 use Laravel\Passport\Bridge\PersonalAccessGrant;
 use Laravel\Passport\Passport;
 use League\OAuth2\Server\Grant\ClientCredentialsGrant;
+use League\OAuth2\Server\ResourceServer;
 
 class PassportServiceProvider extends \Laravel\Passport\PassportServiceProvider
 {
@@ -57,6 +59,22 @@ class PassportServiceProvider extends \Laravel\Passport\PassportServiceProvider
                     );
                 }
             });
+        });
+    }
+
+    /**
+     * Register the resource server.
+     *
+     * @return void
+     */
+    protected function registerResourceServer()
+    {
+        $this->app->singleton(ResourceServer::class, function ($container) {
+            $accessTokenRepository = $container->make(\Laravel\Passport\Bridge\AccessTokenRepository::class);
+            $publicKey = $this->makeCryptKey('public');
+            $tokenValidator = (new BearerTokenValidator($accessTokenRepository));
+            $tokenValidator->setPublicKey($publicKey);
+            return new ResourceServer($accessTokenRepository, $publicKey, $tokenValidator);
         });
     }
 }
