@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Actions\Article;
+namespace App\Http\Controllers\Article;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ArticleResource;
 use App\Models\Article;
 use Illuminate\Http\Request;
 
-class ShowAction extends Controller
+class Show extends Controller
 {
     /**
      * Handle the incoming request.
