@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const http = axios.create({
     timeout: 10000,
-    baseURL: `${import.meta.env.VITE_API_URL}/api`,
+    baseURL: `${import.meta.env.VITE_API_URL}/api/v1`,
     withCredentials: false, // don't send cookies when cross-domain requests
     headers: {
         'Accept': 'application/json',
@@ -12,8 +12,8 @@ const http = axios.create({
 
 const authRequestInterceptor = http.interceptors.request.use(
     config => {
-        // const access_token = sessionStorage.getItem('access_token');
-        // config.headers.Authorization = `Bearer ${access_token}`;
+        const access_token = sessionStorage.getItem('access_token');
+        config.headers.Authorization = `Bearer ${access_token}`;
         return config;
     }, error => {
         // Do something with request error
