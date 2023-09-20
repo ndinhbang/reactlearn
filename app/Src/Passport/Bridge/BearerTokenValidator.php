@@ -117,6 +117,13 @@ class BearerTokenValidator implements AuthorizationValidatorInterface
 
         $claims = $token->claims();
 
+        // Check if token fingerprint is matched
+        if (is_null($fingerprint = data_get($request->getCookieParams(), config('passport.cookie.fingerprint')))
+            || is_null($fp = $claims->get('fp'))
+            || !hash_equals($fp, hash('sha256', $fingerprint))) {
+            throw OAuthServerException::accessDenied('The request is malformed');
+        }
+
         // Check if token has been revoked
         if ($this->accessTokenRepository->isAccessTokenRevoked($claims->get('jti'))) {
             throw OAuthServerException::accessDenied('Access token has been revoked');
