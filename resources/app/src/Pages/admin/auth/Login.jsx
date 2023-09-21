@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, redirect, useNavigate } from 'react-router-dom'
 import {
     CCard,
     CCardBody,
@@ -13,6 +13,7 @@ import {
 } from '@coreui/react-pro'
 import { atom, useAtom, useAtomValue, useSetAtom } from "jotai";
 import { selectAtom } from "jotai/utils";
+import { login } from "@/services/auth.service.js";
 
 const defaultValues = {
     username: '',
@@ -45,6 +46,32 @@ const PasswordField = ({onChange}) => {
     )
 }
 
+const SubmitButton = ({onSuccess, onError}) => {
+    const navigate = useNavigate();
+    const credentials = useAtomValue(valueAtom)
+    const loadingAtom = useMemo(() => atom(false), [])
+    const [loading, setLoading] = useAtom(loadingAtom)
+
+    const handleSubmit = useCallback(async (e) => {
+        setLoading(true)
+        try {
+            const {data } = await login(credentials)
+            sessionStorage.setItem('access_token', data.access_token)
+            navigate('/admin/dashboard')
+        } catch (err) {
+            console.error(err)
+        } finally {
+            setLoading(false)
+        }
+        // setTimeout( () => setLoading(false), 2000)
+    }, [credentials])
+    return (
+        <CLoadingButton color="primary" className="px-4" onClick={handleSubmit} loading={loading}>
+            Login
+        </CLoadingButton>
+    )
+}
+
 const AdminLogin = () => {
     const setValue = useSetAtom(valueAtom)
 
@@ -64,9 +91,7 @@ const AdminLogin = () => {
                             <PasswordField onChange={handleChange}/>
                             <CRow>
                                 <CCol xs={6}>
-                                    <CLoadingButton color="primary" className="px-4">
-                                        Login
-                                    </CLoadingButton>
+                                    <SubmitButton />
                                 </CCol>
                                 <CCol xs={6} className="text-right">
                                     <div className="d-flex justify-content-end">
