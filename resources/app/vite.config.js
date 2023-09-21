@@ -1,7 +1,7 @@
 import { defineConfig, loadEnv, splitVendorChunkPlugin } from 'vite'
 import react from '@vitejs/plugin-react-swc'
-import { fileURLToPath, URL } from 'url'
-import dns from 'dns'
+import { fileURLToPath, URL } from 'node:url'
+import dns from 'node:dns'
 
 // @see: https://vitejs.dev/config/server-options.html#server-host
 dns.setDefaultResultOrder('verbatim')

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import {
     CCard,
@@ -11,8 +11,21 @@ import {
     CLoadingButton,
     CRow,
 } from '@coreui/react-pro'
+import { atom, useAtom } from "jotai";
+
+const defaultValues = {
+    username: '',
+    password: '',
+}
 
 const AdminLogin = () => {
+    const valueAtom = useMemo(() => atom(defaultValues), [])
+    const [value, setValue] = useAtom(valueAtom)
+
+    const handleChange = (e) => {
+        setValue({...value, [e.target.name]: e.target.value })
+    }
+
     return (
         <CCol md={4} className="admin-auth-login">
             <CCardGroup>
@@ -22,13 +35,15 @@ const AdminLogin = () => {
                             <h3>Admin Login</h3>
                             <p className="text-medium-emphasis">Sign In to your account</p>
                             <CInputGroup className="mb-3">
-                                <CFormInput placeholder="Email" autoComplete="email" />
+                                <CFormInput placeholder="Email" name={'username'} value={value.username} onChange={handleChange}/>
                             </CInputGroup>
                             <CInputGroup className="mb-4">
                                 <CFormInput
                                     type="password"
+                                    name={'password'}
+                                    value={value.password}
                                     placeholder="Password"
-                                    autoComplete="current-password"
+                                    onChange={handleChange}
                                 />
                             </CInputGroup>
                             <CRow>
