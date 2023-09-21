@@ -3,7 +3,7 @@ import axios from 'axios';
 const http = axios.create({
     timeout: 10000,
     baseURL: `${import.meta.env.VITE_API_URL}/api/v1`,
-    withCredentials: false, // don't send cookies when cross-domain requests
+    withCredentials: true, // don't send cookies when cross-domain requests
     headers: {
         'Accept': 'application/json',
         'Content-type': 'application/json',
