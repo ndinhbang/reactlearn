@@ -1,5 +1,6 @@
-import { Link, useLoaderData, useNavigation } from "react-router-dom";
+import { Await, defer, Link, useLoaderData } from "react-router-dom";
 import { getArticles } from "@/services/article.service.js";
+import { Suspense } from "react";
 
 const ArticleListItem = ({item}) => {
     return (
@@ -31,28 +32,36 @@ const ArticleList = ({list}) => {
 }
 
 
-export const articlePagingListLoader = async ({request, params}) => {
-    const response = await getArticles({params});
-    return {
-        list: response
-    }
+export const articlePagingListDeferLoader = async ({request, params}) => {
+    const promise = getArticles({params});
+
+    return defer({
+        list: promise
+    })
 }
 
-const ArticleIndex = () => {
-    const navigation = useNavigation();
-    const {list} = useLoaderData();
+const AdminArticleIndex = () => {
+    const data = useLoaderData();
 
     return (
         <div>
-            <div>ArticleIndex</div>
-            <div>{navigation.state}</div>
+            <div>AdminArticleIndex</div>
+
             <div>
-                <Link to={'/tenant/dashboard'}>Back to dashboard</Link>
+                <Link to={'/admin/dashboard'}>Back to dashboard</Link>
             </div>
 
-            <ArticleList list={list}/>
+            <Suspense
+                fallback={<p>Loading ...</p>}
+            >
+                <Await
+                    resolve={data.list}
+                >
+                    {(list) => <ArticleList list={list}/>}
+                </Await>
+            </Suspense>
         </div>
     )
 }
 
-export default ArticleIndex
+export default AdminArticleIndex

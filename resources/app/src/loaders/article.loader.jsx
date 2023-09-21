@@ -1,4 +1,4 @@
-import { getArticles, getDetailArticles } from "@/services/article.service";
+import { getArticles, getDetailArticle } from "@/services/article.service.js";
 import { defer } from "react-router-dom";
 
 export async function articlePaginationLoader({ params }) {
@@ -10,5 +10,5 @@ export async function articlePaginationLoader({ params }) {
 }
 
 export async function articleDetailLoader({ params }) {
-    return await getDetailArticles(params);
+    return await getDetailArticle(params);
 }

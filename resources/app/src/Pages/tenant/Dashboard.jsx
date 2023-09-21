@@ -1,10 +1,25 @@
-import { useNavigation } from "react-router-dom";
+import { NavLink, useNavigation } from "react-router-dom";
 
 const TenantDashboard = () => {
     const navigation = useNavigation();
 
     return (
-        <div>TenantDashboard {navigation.state === "navigating" ? "navigating" : ""}</div>
+        <div>
+            <div>TenantDashboard</div>
+            <div>{navigation.state}</div>
+            <nav id="sidebar">
+                <div>
+                    <NavLink
+                        to="/tenant/article"
+                        className={({ isActive, isPending }) =>
+                            isPending ? "pending" : isActive ? "active" : ""
+                        }
+                    >
+                        Article List
+                    </NavLink>
+                </div>
+            </nav>
+        </div>
     )
 }
 

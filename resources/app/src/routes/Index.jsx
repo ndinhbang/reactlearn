@@ -1,9 +1,6 @@
 import Error404 from "@/Pages/Error404";
-import Dashboard from "@/Pages/Dashboard";
-import ArticleIndex from "@/Pages/tenant/modules/article";
-import Home from "@/Pages/Home";
-import ArticleDetail from "@/Pages/tenant/modules/article/Detail";
-import { articleDetailLoader, articlePaginationLoader } from "@/loaders/article.loader.jsx";
+import ArticleIndex, { articlePagingListLoader } from "@/Pages/tenant/modules/article";
+import ArticleDetail, { articleDetailLoader } from "@/Pages/tenant/modules/article/Detail";
 import Empty from "@/Pages/Empty.jsx";
 import Login from "@/Pages/auth/Login.jsx";
 import MasterLayout from "@/Layouts/Master";
@@ -17,10 +14,12 @@ import TenantLogin from "@/Pages/tenant/auth/Login";
 import TenantForgotPassword from "@/Pages/tenant/auth/ForgotPassword";
 import TenantDashboard from "@/Pages/tenant/Dashboard";
 import AdminDashboard from "@/Pages/admin/Dashboard";
-import AdminLayout from "@/Layouts/Admin";
+import AdminLayout, { currentUserLoader } from "@/Layouts/Admin";
 import TenantIndex from "@/Pages/admin/modules/tenant";
 import TenantDetail from "@/Pages/admin/modules/tenant/Detail";
 import TenantLayout from "@/Layouts/Tenant";
+import AdminArticleIndex, { articlePagingListDeferLoader } from "@/Pages/admin/modules/article";
+import AdminArticleDetail, { articleDetailDeferLoader } from "@/Pages/admin/modules/article/Detail.jsx";
 
 const routes = [
     {
@@ -66,6 +65,7 @@ const routes = [
                     },
                     {
                         element: <AdminLayout/>,
+                        loader: currentUserLoader,
                         children: [
                             {
                                 path: "dashboard",
@@ -78,6 +78,16 @@ const routes = [
                             {
                                 path: "tenant/:id",
                                 element: <TenantDetail/>,
+                            },
+                            {
+                                path: "article",
+                                loader: articlePagingListDeferLoader,
+                                element: <AdminArticleIndex/>,
+                            },
+                            {
+                                path: "article/:id",
+                                loader:articleDetailDeferLoader,
+                                element: <AdminArticleDetail/>,
                             },
                         ]
                     },
@@ -110,25 +120,17 @@ const routes = [
                             },
                             {
                                 path: "article",
+                                loader: articlePagingListLoader,
                                 element: <ArticleIndex/>,
                             },
                             {
                                 path: "article/:id",
+                                loader: articleDetailLoader,
                                 element: <ArticleDetail/>,
                             },
                         ]
                     },
                 ]
-            },
-            {
-                path: "/articles",
-                loader: articlePaginationLoader,
-                element: <ArticleIndex/>,
-            },
-            {
-                path: "/articles/:id",
-                loader: articleDetailLoader,
-                element: <ArticleDetail/>,
             },
         ]
     },
