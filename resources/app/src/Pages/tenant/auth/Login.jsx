@@ -1,9 +1,15 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { CCard, CCardBody, CCardGroup, CCol, } from '@coreui/react-pro'
 import LoginForm from "@/Modules/Tenant/Auth/Login/Forms/LoginForm.jsx";
-import {formAtom} from "@/Modules/Tenant/Auth/Login/Forms/login.atom.js";
+import { atom } from "jotai";
+
+const defaultValues = {
+    username: '',
+    password: '',
+}
 
 const TenantLogin = () => {
+    const formAtom = useMemo(() => atom(defaultValues), [])
     return (
         <CCol md={4} className="admin-auth-login">
             <CCardGroup>
