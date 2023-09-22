@@ -84,7 +84,7 @@ const AdminLogin = () => {
             <CCardGroup>
                 <CCard className="p-2">
                     <CCardBody>
-                        {/*<CForm>*/}
+                        <CForm>
                             <h3>Admin Login</h3>
                             <p className="text-medium-emphasis">Sign In to your account</p>
                             <UsernameField onChange={handleChange}/>
@@ -101,7 +101,7 @@ const AdminLogin = () => {
                                     </div>
                                 </CCol>
                             </CRow>
-                        {/*</CForm>*/}
+                        </CForm>
                     </CCardBody>
                 </CCard>
             </CCardGroup>

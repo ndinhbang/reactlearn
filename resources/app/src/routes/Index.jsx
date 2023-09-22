@@ -20,6 +20,7 @@ import TenantDetail from "@/Pages/admin/modules/tenant/Detail";
 import TenantLayout from "@/Layouts/Tenant";
 import AdminArticleIndex, { articlePagingListDeferLoader } from "@/Pages/admin/modules/article";
 import AdminArticleDetail, { articleDetailDeferLoader } from "@/Pages/admin/modules/article/Detail.jsx";
+import Home from "@/Pages/Home.jsx";
 
 const routes = [
     {
@@ -29,7 +30,7 @@ const routes = [
         children: [
             {
                 index: true,
-                element: <Empty/>,
+                element: <Home/>,
             },
             {
                 path: "auth",
