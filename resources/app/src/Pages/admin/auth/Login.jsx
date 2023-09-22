@@ -21,6 +21,10 @@ const defaultValues = {
 }
 
 const valueAtom = atom(defaultValues);
+valueAtom.onMount = (setAtom) => {
+    console.log('atom is mounted in provider')
+    setAtom(defaultValues)
+}
 
 const UsernameField = ({onChange}) => {
     const username = useAtomValue(useMemo(() => selectAtom(valueAtom, (v) => v.username), []))
