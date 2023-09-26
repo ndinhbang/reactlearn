@@ -1,5 +1,5 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useCallback, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import {
     CCard,
     CCardBody,
@@ -12,21 +12,81 @@ import {
     CRow,
 } from '@coreui/react-pro'
 import { create } from "zustand";
+import { login } from "@/services/auth.service.js";
 
-const useCredentialsStore = create((set) => ({
+const useCredentialsStore = create((set, get) => ({
     username: "",
     password: "",
     setUsername: (username) => set({ username: username }),
     setPassword: (password) => set({ password: password }),
+    login: async () => {
+        const {data } = await login({
+            username: get().username,
+            password: get().password
+        })
+        sessionStorage.setItem('access_token', data.access_token)
+    },
 }))
+
+const UsernameField = () => {
+    const username = useCredentialsStore((state) => state.username)
+    const setUsername = useCredentialsStore((state) => state.setUsername)
+
+    return (
+        <CInputGroup className="mb-3">
+            <CFormInput
+                placeholder="Username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                autoComplete="email"
+            />
+        </CInputGroup>
+    )
+}
+
+const PasswordField = () => {
+    const password = useCredentialsStore((state) => state.password)
+    const setPassword = useCredentialsStore((state) => state.setPassword)
+
+    return (
+        <CInputGroup className="mb-4">
+            <CFormInput
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                autoComplete="current-password"
+            />
+        </CInputGroup>
+    )
+}
+
+const LoginButton = () => {
+    const navigate = useNavigate();
+    const [loading, setLoading] = useState(false)
+    const login = useCredentialsStore((state) => state.login)
+    const handleSubmit = useCallback(async (e) => {
+        setLoading(true)
+        try {
+            await login()
+            navigate('/tenant/dashboard')
+        } catch (err) {
+            console.error(err)
+        } finally {
+            setLoading(false)
+        }
+    }, [])
+
+    return (
+        <CLoadingButton color="primary" className="px-4" onClick={handleSubmit} loading={loading}>
+            Login
+        </CLoadingButton>
+    )
+}
+
 
 
 const Login = () => {
-    const username = useCredentialsStore((state) => state.username)
-    const password = useCredentialsStore((state) => state.password)
-    const setUsername = useCredentialsStore((state) => state.setUsername)
-    const setPassword = useCredentialsStore((state) => state.setPassword)
-
     return (
         <CCol md={4}>
             <CCardGroup>
@@ -35,28 +95,11 @@ const Login = () => {
                         <CForm>
                             <h3>Guest Login</h3>
                             <p className="text-medium-emphasis">Sign In to your account</p>
-                            <CInputGroup className="mb-3">
-                                <CFormInput
-                                    placeholder="Username"
-                                    value={username}
-                                    onChange={(e) => setUsername(e.target.value)}
-                                    autoComplete="email"
-                                />
-                            </CInputGroup>
-                            <CInputGroup className="mb-4">
-                                <CFormInput
-                                    type="password"
-                                    placeholder="Password"
-                                    value={password}
-                                    onChange={(e) => setPassword(e.target.value)}
-                                    autoComplete="current-password"
-                                />
-                            </CInputGroup>
+                            <UsernameField />
+                            <PasswordField />
                             <CRow>
                                 <CCol xs={6}>
-                                    <CLoadingButton color="primary" className="px-4">
-                                        Login
-                                    </CLoadingButton>
+                                    <LoginButton />
                                 </CCol>
                                 <CCol xs={6} className="text-right">
                                     <div className="d-flex justify-content-end">
