@@ -11,8 +11,22 @@ import {
     CLoadingButton,
     CRow,
 } from '@coreui/react-pro'
+import { create } from "zustand";
+
+const useCredentialsStore = create((set) => ({
+    username: "",
+    password: "",
+    setUsername: (username) => set({ username: username }),
+    setPassword: (password) => set({ password: password }),
+}))
+
 
 const Login = () => {
+    const username = useCredentialsStore((state) => state.username)
+    const password = useCredentialsStore((state) => state.password)
+    const setUsername = useCredentialsStore((state) => state.setUsername)
+    const setPassword = useCredentialsStore((state) => state.setPassword)
+
     return (
         <CCol md={4}>
             <CCardGroup>
@@ -22,12 +36,19 @@ const Login = () => {
                             <h3>Guest Login</h3>
                             <p className="text-medium-emphasis">Sign In to your account</p>
                             <CInputGroup className="mb-3">
-                                <CFormInput placeholder="Email" autoComplete="email" />
+                                <CFormInput
+                                    placeholder="Username"
+                                    value={username}
+                                    onChange={(e) => setUsername(e.target.value)}
+                                    autoComplete="email"
+                                />
                             </CInputGroup>
                             <CInputGroup className="mb-4">
                                 <CFormInput
                                     type="password"
                                     placeholder="Password"
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
                                     autoComplete="current-password"
                                 />
                             </CInputGroup>
