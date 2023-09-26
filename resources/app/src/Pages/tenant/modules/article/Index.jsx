@@ -1,5 +1,6 @@
-import { Link, useLoaderData, useNavigation } from "react-router-dom";
+import { Link, useLoaderData, useNavigation, useParams } from "react-router-dom";
 import { getArticles } from "@/services/article.service.js";
+import { useQuery } from "@tanstack/react-query";
 
 const ArticleListItem = ({item}) => {
     return (
@@ -30,17 +31,35 @@ const ArticleList = ({list}) => {
     )
 }
 
+const articleListQuery = params => ({
+    queryKey: ['articles'],
+    queryFn: async () => getArticles({params}),
+})
 
-export const articlePagingListLoader = async ({request, params}) => {
-    const response = await getArticles({params});
-    return {
-        list: response
-    }
+
+export const articlePagingListLoader = (queryClient) => async ({request, params}) => {
+    const query = articleListQuery(params)
+
+    console.log('cached data', queryClient.getQueryData(query.queryKey))
+
+    return (
+        queryClient.getQueryData(query.queryKey) ??
+        (await queryClient.fetchQuery(query))
+    )
+    // const response = await getArticles({params});
+    // return {
+    //     list: response
+    // }
 }
 
 const ArticleIndex = () => {
     const navigation = useNavigation();
-    const {list} = useLoaderData();
+    const params = useParams()
+    const response = useQuery(articleListQuery(params))
+    // console.log(response)
+    // const {list} = useLoaderData();
+
+
 
     return (
         <div>
@@ -50,7 +69,7 @@ const ArticleIndex = () => {
                 <Link to={'/tenant/dashboard'}>Back to dashboard</Link>
             </div>
 
-            <ArticleList list={list}/>
+            <ArticleList list={response.data}/>
         </div>
     )
 }

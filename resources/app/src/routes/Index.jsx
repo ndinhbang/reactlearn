@@ -21,6 +21,7 @@ import TenantLayout from "@/Layouts/Tenant";
 import AdminArticleIndex, { articlePagingListDeferLoader } from "@/Pages/admin/modules/article";
 import AdminArticleDetail, { articleDetailDeferLoader } from "@/Pages/admin/modules/article/Detail.jsx";
 import Home from "@/Pages/Home.jsx";
+import queryClient from "@/utils/queryClient";
 
 const routes = [
     {
@@ -121,7 +122,7 @@ const routes = [
                             },
                             {
                                 path: "article",
-                                loader: articlePagingListLoader,
+                                loader: articlePagingListLoader(queryClient),
                                 element: <ArticleIndex/>,
                             },
                             {
