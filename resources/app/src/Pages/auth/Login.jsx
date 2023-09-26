@@ -13,6 +13,7 @@ import {
 } from '@coreui/react-pro'
 import { create } from "zustand";
 import { login } from "@/services/auth.service.js";
+import { createTrackedSelector } from "react-tracked";
 
 const useCredentialsStore = create((set, get) => ({
     username: "",
@@ -28,16 +29,16 @@ const useCredentialsStore = create((set, get) => ({
     },
 }))
 
-const UsernameField = () => {
-    const username = useCredentialsStore((state) => state.username)
-    const setUsername = useCredentialsStore((state) => state.setUsername)
+const useTrackedCredentialsStore = createTrackedSelector(useCredentialsStore);
 
+const UsernameField = () => {
+    const state = useTrackedCredentialsStore();
     return (
         <CInputGroup className="mb-3">
             <CFormInput
                 placeholder="Username"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
+                value={state.username}
+                onChange={(e) => state.setUsername(e.target.value)}
                 autoComplete="email"
             />
         </CInputGroup>
@@ -45,16 +46,14 @@ const UsernameField = () => {
 }
 
 const PasswordField = () => {
-    const password = useCredentialsStore((state) => state.password)
-    const setPassword = useCredentialsStore((state) => state.setPassword)
-
+    const state = useTrackedCredentialsStore();
     return (
         <CInputGroup className="mb-4">
             <CFormInput
                 type="password"
                 placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                value={state.password}
+                onChange={(e) => state.setPassword(e.target.value)}
                 autoComplete="current-password"
             />
         </CInputGroup>
