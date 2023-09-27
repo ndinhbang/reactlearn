@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react'
 import { CCard, CCardBody, CCardGroup, CCol, } from '@coreui/react-pro'
-import LoginForm from "@/Modules/Tenant/Auth/Login/Forms/LoginForm.jsx";
+import LoginForm from "@/modules/tenant/auth/login/form/LoginForm.jsx";
 import { atom } from "jotai";
 
 const defaultValues = {

@@ -1,11 +1,11 @@
 import { CCol, CForm, CRow } from "@coreui/react-pro";
 import { Link } from "react-router-dom";
 import React, { useCallback } from "react";
-import UsernameField from "@/Modules/Tenant/Auth/Login/Forms/Fields/UsernameField.jsx";
-import PasswordField from "@/Modules/Tenant/Auth/Login/Forms/Fields/PasswordField.jsx";
+import UsernameField from "@/modules/tenant/auth/login/form/field/UsernameField.jsx";
+import PasswordField from "@/modules/tenant/auth/login/form/field/PasswordField.jsx";
 import { useSetAtom } from "jotai";
 import PropTypes from "prop-types";
-import LoginButton from "@/Modules/Tenant/Auth/Login/Forms/Actions/LoginButton.jsx";
+import LoginButton from "@/modules/tenant/auth/login/form/action/LoginButton.jsx";
 
 const LoginForm = ({formAtom}) => {
 
