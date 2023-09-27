@@ -3,14 +3,17 @@
 namespace App\Providers;
 
 // use Illuminate\Support\Facades\Gate;
-use App\Src\Passport\Bridge\AccessToken;
-use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
-use Laravel\Passport\Passport;
 use App\Models\Passport\AuthCode;
 use App\Models\Passport\Client;
 use App\Models\Passport\PersonalAccessClient;
 use App\Models\Passport\RefreshToken;
 use App\Models\Passport\Token;
+use App\Src\CacheableEloquentUserProvider;
+use App\Src\Passport\Bridge\AccessToken;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Auth;
+use Laravel\Passport\Passport;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -28,9 +31,13 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        Auth::provider('cacheable_eloquent', function(Application $app, array $config) {
+            return new CacheableEloquentUserProvider($app['hash'], $config['model']);
+        });
+
         Passport::cookie(config('passport.cookie.access_token'));
         Passport::hashClientSecrets();
-        Passport::tokensExpireIn(now()->addMinutes(15));
+        Passport::tokensExpireIn(now()->addMinutes(60000));
         Passport::refreshTokensExpireIn(now()->addDays(7));
         Passport::personalAccessTokensExpireIn(now()->addMonths(6));
 
