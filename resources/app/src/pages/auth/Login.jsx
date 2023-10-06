@@ -1,6 +1,6 @@
 import React from 'react'
 import { Card, Col, Row, Space, Typography } from "antd";
-import { createForm, registerValidateLocale } from "@formily/core";
+import { createForm, registerValidateLocale, registerValidateRules, setValidateLanguage } from "@formily/core";
 import { createSchemaField } from "@formily/react";
 import { Form, FormItem, Input, Password, Submit } from '@formily/antd-v5'
 import loginSchema from "@/modules/guest/auth/login.schema.js";
@@ -20,13 +20,27 @@ const SchemaField = createSchemaField({
 
 const {Title} = Typography;
 
+setValidateLanguage('en-US')
+
 registerValidateLocale({
     'en-US': {
         required: 'This field is required.',
     },
 })
 
+registerValidateRules({
+    gte100(value, rule, ctx) {
+        // console.log('gte100', value, rule, ctx)
+        return value < 100 ? 'must be greater than 100' : ''
+    },
+})
+
+
 const Login = () => {
+    const onSubmit = (values) => {
+        console.log(values)
+    }
+
     return (
         <Row justify="center" align="middle" style={{minHeight: '100vh'}}>
             <Col span={5}>
@@ -43,7 +57,7 @@ const Login = () => {
 
                             <Row justify="space-between">
                                 <Col>
-                                    <Submit size="large" onSubmit={console.log}>
+                                    <Submit size="large" onSubmit={onSubmit}>
                                         Log in
                                     </Submit>
                                 </Col>

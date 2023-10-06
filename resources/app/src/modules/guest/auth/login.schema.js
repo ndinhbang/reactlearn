@@ -28,6 +28,12 @@ const loginSchema = {
                 'placeholder': 'Password',
                 // prefix: '{{icon('LockOutlined')}}',
             },
+            'x-validator': [
+                {
+                    min: 3,
+                    message: 'Minimum length is {{ min }}!',
+                },
+            ],
         },
     },
 }
