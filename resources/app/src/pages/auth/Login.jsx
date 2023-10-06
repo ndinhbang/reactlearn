@@ -1,118 +1,63 @@
-import React, { useCallback, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import {
-    CCard,
-    CCardBody,
-    CCardGroup,
-    CCol,
-    CForm,
-    CFormInput,
-    CInputGroup,
-    CLoadingButton,
-    CRow,
-} from '@coreui/react-pro'
-import { create } from "zustand";
-import { login } from "@/services/auth.service.js";
-import { createTrackedSelector } from "react-tracked";
+import React from 'react'
+import { Card, Col, Row, Space, Typography } from "antd";
+import { createForm, registerValidateLocale } from "@formily/core";
+import { createSchemaField } from "@formily/react";
+import { Form, FormItem, Input, Password, Submit } from '@formily/antd-v5'
+import loginSchema from "@/modules/guest/auth/login.schema.js";
+import { Link } from "react-router-dom";
 
-const useCredentialsStore = create((set, get) => ({
-    username: "",
-    password: "",
-    setUsername: (username) => set({ username: username }),
-    setPassword: (password) => set({ password: password }),
-    login: async () => {
-        const {data } = await login({
-            username: get().username,
-            password: get().password
-        })
-        sessionStorage.setItem('access_token', data.access_token)
+const form = createForm({
+    validateFirst: true,
+})
+
+const SchemaField = createSchemaField({
+    components: {
+        FormItem,
+        Input,
+        Password,
     },
-}))
+})
 
-const useTrackedCredentialsStore = createTrackedSelector(useCredentialsStore);
+const {Title} = Typography;
 
-const UsernameField = () => {
-    const state = useTrackedCredentialsStore();
-    return (
-        <CInputGroup className="mb-3">
-            <CFormInput
-                placeholder="Username"
-                value={state.username}
-                onChange={(e) => state.setUsername(e.target.value)}
-                autoComplete="email"
-            />
-        </CInputGroup>
-    )
-}
-
-const PasswordField = () => {
-    const state = useTrackedCredentialsStore();
-    return (
-        <CInputGroup className="mb-4">
-            <CFormInput
-                type="password"
-                placeholder="Password"
-                value={state.password}
-                onChange={(e) => state.setPassword(e.target.value)}
-                autoComplete="current-password"
-            />
-        </CInputGroup>
-    )
-}
-
-const LoginButton = () => {
-    const navigate = useNavigate();
-    const [loading, setLoading] = useState(false)
-    const login = useCredentialsStore((state) => state.login)
-    const handleSubmit = useCallback(async (e) => {
-        setLoading(true)
-        try {
-            await login()
-            navigate('/tenant/dashboard')
-        } catch (err) {
-            console.error(err)
-        } finally {
-            setLoading(false)
-        }
-    }, [])
-
-    return (
-        <CLoadingButton color="primary" className="px-4" onClick={handleSubmit} loading={loading}>
-            Login
-        </CLoadingButton>
-    )
-}
-
-
+registerValidateLocale({
+    'en-US': {
+        required: 'This field is required.',
+    },
+})
 
 const Login = () => {
     return (
-        <CCol md={4}>
-            <CCardGroup>
-                <CCard className="p-2">
-                    <CCardBody>
-                        <CForm>
-                            <h3>Guest Login</h3>
-                            <p className="text-medium-emphasis">Sign In to your account</p>
-                            <UsernameField />
-                            <PasswordField />
-                            <CRow>
-                                <CCol xs={6}>
-                                    <LoginButton />
-                                </CCol>
-                                <CCol xs={6} className="text-right">
-                                    <div className="d-flex justify-content-end">
-                                        <Link className="btn btn-link px-0" to={`/auth/forgot-password`}>
-                                            Forgot password?
-                                        </Link>
-                                    </div>
-                                </CCol>
-                            </CRow>
-                        </CForm>
-                    </CCardBody>
-                </CCard>
-            </CCardGroup>
-        </CCol>
+        <Row justify="center" align="middle" style={{minHeight: '100vh'}}>
+            <Col span={5}>
+                <Card bordered>
+                    <Form
+                        form={form}
+                        layout="vertical"
+                        size="large"
+                        onAutoSubmit={console.log}
+                    >
+                        <Space direction="vertical" size="small" style={{display: 'flex'}}>
+                            <Title level={4} className={`mb-3`}>Guest Login</Title>
+                            <SchemaField schema={loginSchema}/>
+
+                            <Row justify="space-between">
+                                <Col>
+                                    <Submit size="large" onSubmit={console.log}>
+                                        Log in
+                                    </Submit>
+                                </Col>
+                                <Col>
+                                    <Link className="btn btn-link px-0" to={`/auth/forgot-password`}>
+                                        Forgot password?
+                                    </Link>
+                                </Col>
+                            </Row>
+                        </Space>
+                    </Form>
+                </Card>
+            </Col>
+        </Row>
     )
 }
 

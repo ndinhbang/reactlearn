@@ -1,10 +1,14 @@
 import { Outlet } from "react-router-dom";
+import { Layout } from "antd";
 
 const MasterLayout = () => {
     return (
-        <div className={`master-layout`}>
-            <Outlet />
-        </div>
+        <Layout
+            className={`master-layout`}
+            style={{minHeight: '100vh'}}
+        >
+            <Outlet/>
+        </Layout>
     )
 }
 
