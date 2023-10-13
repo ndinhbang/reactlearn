@@ -1,11 +1,12 @@
 import { Outlet } from "react-router-dom";
+import { CContainer } from "@coreui/react-pro";
 
-const TenantMasterLayout = () => {
+const SampleMasterLayout = () => {
     return (
-        <div className={`tenant-master-layout`}>
+        <CContainer className={`sample-master-layout`}>
             <Outlet />
-        </div>
+        </CContainer>
     )
 }
 
-export default TenantMasterLayout
+export default SampleMasterLayout

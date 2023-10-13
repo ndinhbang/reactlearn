@@ -10,7 +10,7 @@ import { createElement } from "react";
 const routes = [
     {
         path: "/",
-        element: createElement(MasterLayout),
+        element: createElement(MasterLayout), // same as <MasterLayout />, but you have to rename this file to use .jsx extension
         errorElement: createElement(Error404),
         children: [
             {
